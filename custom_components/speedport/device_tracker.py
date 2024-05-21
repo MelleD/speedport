@@ -123,8 +123,12 @@ class SpeedportTracker(CoordinatorEntity, ScannerEntity):
 
     @property
     def name(self) -> str:
-        """Return device name."""
-        return self._device.name
+        try:
+            """Return device name."""
+            return self._device.name
+        except AttributeError:
+            """The device is disconnected or unavailable in the router."""
+            return ""
 
     @callback
     def _handle_coordinator_update(self) -> None:
