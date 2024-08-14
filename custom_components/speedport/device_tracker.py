@@ -61,23 +61,39 @@ class SpeedportTracker(CoordinatorEntity, ScannerEntity):
 
     @property
     def hostname(self) -> str | None:
-        """Return the hostname of device."""
-        return self._device.name
+        try:
+            """Return the hostname of device."""
+            return self._device.name
+        except AttributeError:
+            """The device is disconnected or unavailable in the router."""
+            return None
 
     @property
     def ip_address(self) -> str | None:
-        """Return the primary ip address of the device."""
-        return self._device.ipv4
+        try:
+            """Return the primary ip address of the device."""
+            return self._device.ipv4
+        except AttributeError:
+            """The device is disconnected or unavailable in the router."""
+            return None
 
     @property
     def is_connected(self) -> bool:
-        """Return device status."""
-        return self._device.connected
+        try:
+            """Return device status."""
+            return self._device.connected
+        except AttributeError:
+            """The device is disconnected or unavailable in the router."""
+            return False
 
     @property
     def mac_address(self) -> str:
-        """Return mac_address."""
-        return self._device.mac
+        try:
+            """Return mac_address."""
+            return self._device.mac
+        except AttributeError:
+            """The device is disconnected or unavailable in the router."""
+            return ""
 
     @property
     def icon(self) -> str:
@@ -107,8 +123,12 @@ class SpeedportTracker(CoordinatorEntity, ScannerEntity):
 
     @property
     def name(self) -> str:
-        """Return device name."""
-        return self._device.name
+        try:
+            """Return device name."""
+            return self._device.name
+        except AttributeError:
+            """The device is disconnected or unavailable in the router."""
+            return ""
 
     @callback
     def _handle_coordinator_update(self) -> None:
