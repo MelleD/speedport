@@ -65,9 +65,7 @@ class SpeedportEntity(CoordinatorEntity[SpeedportCoordinator]):
         self.async_write_ha_state()
 
 
-def get_coordinator(
-    hass: HomeAssistant, speedport: Speedport
-) -> SpeedportCoordinator:
+def get_coordinator(hass: HomeAssistant, speedport: Speedport) -> SpeedportCoordinator:
     coordinators = hass.data[DOMAIN]["coordinators"]
     if speedport.serial_number in coordinators:
         coordinator: SpeedportCoordinator = hass.data[DOMAIN]["coordinators"][
