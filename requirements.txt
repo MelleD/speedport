@@ -1,2 +1,1 @@
-speedport-api==0.5.8
-pytz>=2023.3
+speedport-api==0.5.9

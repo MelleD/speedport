@@ -55,4 +55,3 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         await speedport.close()
 
     return unload_ok
-
