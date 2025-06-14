@@ -1,0 +1,11 @@
+changelog:
+  categories:
+    - title: 🛠 Dependency Upgrades 
+      labels:
+        - dependencies
+    - title: 🐛 Bug fixes
+      labels:
+        - bug
+    - title: ⭐ New Features
+      labels:
+        - "*"
