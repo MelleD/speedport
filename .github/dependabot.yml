@@ -12,7 +12,6 @@ updates:
     # Check the registry for updates every day (weekdays)
     schedule:
       interval: "daily"
-
   # Enable version updates for github-actions
   - package-ecosystem: "github-actions"
     directory: "/"
