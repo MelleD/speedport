@@ -25,6 +25,7 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
     }
 )
 
+
 async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str, Any]:
     """Validate the user input allows us to connect."""
 
@@ -42,6 +43,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
 
     # Return info that you want to store in the config entry.
     return {"title": "Speedport"}
+
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Handle a config flow for Speedport."""
@@ -83,11 +85,14 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Create the options flow."""
         return OptionsFlowHandler(config_entry)
 
+
 class CannotConnect(HomeAssistantError):
     """Error to indicate we cannot connect."""
 
+
 class InvalidAuth(HomeAssistantError):
     """Error to indicate there is invalid auth."""
+
 
 class OptionsFlowHandler(config_entries.OptionsFlow):
     def __init__(self, config_entry: config_entries.ConfigEntry) -> None:

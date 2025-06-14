@@ -18,6 +18,7 @@ from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
+
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: ConfigEntry,
@@ -28,6 +29,7 @@ async def async_setup_entry(
     await coordinator.async_config_entry_first_refresh()
     devices = [SpeedportTracker(coordinator, mac) for mac in await speedport.devices]
     async_add_entities(devices)
+
 
 class SpeedportCoordinator(DataUpdateCoordinator):
     def __init__(self, hass: HomeAssistant, api: Speedport):
@@ -42,6 +44,7 @@ class SpeedportCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self):
         return await self._api.devices
+
 
 class SpeedportTracker(CoordinatorEntity, ScannerEntity):
     def __init__(self, coordinator: SpeedportCoordinator, mac: str) -> None:

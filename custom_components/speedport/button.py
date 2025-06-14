@@ -9,6 +9,7 @@ from speedport import Speedport
 from .const import DOMAIN
 from .device import SpeedportEntity
 
+
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: ConfigEntry,
@@ -22,6 +23,7 @@ async def async_setup_entry(
             SpeedportWPSButton(hass, coordinator),
         ]
     )
+
 
 class SpeedportReconnectButton(ButtonEntity, SpeedportEntity):
     _attr_device_class = ButtonDeviceClass.RESTART
@@ -37,6 +39,7 @@ class SpeedportReconnectButton(ButtonEntity, SpeedportEntity):
         """Send out a restart command."""
         await self._speedport.reconnect()
 
+
 class SpeedportRebootButton(ButtonEntity, SpeedportEntity):
     _attr_device_class = ButtonDeviceClass.RESTART
 
@@ -50,6 +53,7 @@ class SpeedportRebootButton(ButtonEntity, SpeedportEntity):
     async def async_press(self) -> None:
         """Send out a restart command."""
         await self._speedport.reboot()
+
 
 class SpeedportWPSButton(ButtonEntity, SpeedportEntity):
     _attr_device_class = ButtonDeviceClass.IDENTIFY

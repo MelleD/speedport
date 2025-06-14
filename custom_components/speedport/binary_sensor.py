@@ -16,10 +16,12 @@ from .device import SpeedportEntity
 
 _LOGGER = logging.getLogger(__name__)
 
+
 @dataclass
 class SpeedportBinarySensorEntityDescription(BinarySensorEntityDescription):
     condition_key: str = ""
     value: str = ""
+
 
 BINARY_SENSORS: tuple[SpeedportBinarySensorEntityDescription, ...] = (
     SpeedportBinarySensorEntityDescription(
@@ -62,6 +64,7 @@ BINARY_SENSORS: tuple[SpeedportBinarySensorEntityDescription, ...] = (
     ),
 )
 
+
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
@@ -76,6 +79,7 @@ async def async_setup_entry(
     ]
 
     async_add_entities(entities)
+
 
 class SpeedportBinarySensor(SpeedportEntity, BinarySensorEntity):
     entity_description: SpeedportBinarySensorEntityDescription
