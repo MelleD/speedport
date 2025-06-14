@@ -1,25 +1,58 @@
-name: Release
+name: "Create Tagged Release"
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Version number of the release'
+        required: true
 
 jobs:
-  release-zip:
+  gh_tagged_release:
+    name: Create tagged release
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
 
-      - name: ZIP Component Dir
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Setup Git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+      - name: Update version in manifest.json
         run: |
           cd ${{ github.workspace }}/custom_components/speedport
-          zip -r speedport.zip ./
+          release_version="${{ github.event.inputs.release_version }}"
+          echo "Debug: release_version is $release_version"
+          jq --arg version "$release_version" '.version = $version' manifest.json > temp.json
+          mv temp.json manifest.json
 
-      - name: Upload zip to release
-        uses: svenstaro/upload-release-action@v2
+      - name: Build
+        run: |
+          cd ${{ github.workspace }}/custom_components/speedport
+          zip speedport.zip -r ./
+
+      - name: "Create Github release (full)"
+        if: ${{ !contains( github.event.inputs.release_version, '-rc' ) }}
+        uses: softprops/action-gh-release@v2
+        id: speedport_release
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/custom_components/speedport/speedport.zip
-          asset_name: speedport.zip
-          tag: ${{ github.ref }}
-          overwrite: true
+          body: "Release version ${{ github.event.inputs.release_version }}."
+          tag_name: ${{ github.event.inputs.release_version }}
+          target_commitish: "main"
+          draft: false
+          prerelease: false
+          files: ${{ github.workspace }}/custom_components/speedport/speedport.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+
+      - name: "Notify issues of release their fix is contained in"
+        uses: apexskier/github-release-commenter@3bd413ad5e1d603bfe2282f9f06f2bdcec079327 # v1.3.6
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          comment-template: |
+            Release {release_link} addresses this.
+
+
