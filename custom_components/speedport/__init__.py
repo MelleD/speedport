@@ -19,7 +19,6 @@ PLATFORMS: list[Platform] = [
     Platform.SENSOR,
 ]
 
-
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Speedport from a config entry."""
 
@@ -41,12 +40,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     return True
 
-
 async def update_listener(hass, entry):
     """Handle options update."""
     speedport: Speedport = hass.data[DOMAIN][entry.entry_id]
     speedport.set_pause_time(entry.options.get("pause_time", 5))
-
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
@@ -55,4 +52,3 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         await speedport.close()
 
     return unload_ok
-

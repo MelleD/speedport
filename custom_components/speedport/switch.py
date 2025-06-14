@@ -14,7 +14,6 @@ from .device import SpeedportEntity
 
 _LOGGER = logging.getLogger(__name__)
 
-
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
@@ -28,7 +27,6 @@ async def async_setup_entry(
             SpeedportOfficeWifiSwitch(hass, speedport),
         ]
     )
-
 
 class SpeedportWifiSwitch(SwitchEntity, SpeedportEntity):
     _attr_is_on: bool | None = False
@@ -52,7 +50,6 @@ class SpeedportWifiSwitch(SwitchEntity, SpeedportEntity):
         """Turn off switch."""
         await self._speedport.wifi_off()
 
-
 class SpeedportGuestWifiSwitch(SwitchEntity, SpeedportEntity):
     _attr_is_on: bool | None = False
 
@@ -74,7 +71,6 @@ class SpeedportGuestWifiSwitch(SwitchEntity, SpeedportEntity):
     async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn off switch."""
         await self._speedport.wifi_guest_off()
-
 
 class SpeedportOfficeWifiSwitch(SwitchEntity, SpeedportEntity):
     _attr_is_on: bool | None = False

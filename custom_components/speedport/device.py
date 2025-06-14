@@ -15,7 +15,6 @@ from .const import DOMAIN, UPDATE_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
 
-
 class SpeedportCoordinator(DataUpdateCoordinator[None]):
     def __init__(self, hass: HomeAssistant, device: Speedport):
         """Initialize my coordinator."""
@@ -32,7 +31,6 @@ class SpeedportCoordinator(DataUpdateCoordinator[None]):
         await asyncio.gather(
             *[self._speedport.update_status(), self._speedport.update_ip_data()]
         )
-
 
 class SpeedportEntity(CoordinatorEntity[SpeedportCoordinator]):
     _attr_has_entity_name = True
@@ -63,7 +61,6 @@ class SpeedportEntity(CoordinatorEntity[SpeedportCoordinator]):
     @callback
     def _handle_coordinator_update(self) -> None:
         self.async_write_ha_state()
-
 
 def get_coordinator(hass: HomeAssistant, speedport: Speedport) -> SpeedportCoordinator:
     coordinators = hass.data[DOMAIN]["coordinators"]

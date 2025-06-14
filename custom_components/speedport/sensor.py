@@ -96,7 +96,6 @@ SENSORS: tuple[SensorEntityDescription, ...] = (
     ),
 )
 
-
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
@@ -110,7 +109,6 @@ async def async_setup_entry(
     ]
 
     async_add_entities(entities)
-
 
 class SpeedportBinarySensor(SpeedportEntity, SensorEntity):
     entity_description: SensorEntityDescription
