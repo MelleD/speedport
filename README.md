@@ -35,7 +35,7 @@ The Speedport is not available in [HACS][hacs] (Home Assistant Community Store) 
 2. Open HACS in Home Assistant 
 3. Add this repository (https://github.com/MelleD/speedport) via HACS Custom repositories ([How to add Custom Repositories](https://hacs.xyz/docs/faq/custom_repositories/))
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=MelleD&repository=speedport&category=plugin)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=MelleD&repository=speedport&category=integration)
 
 ### Manuall (not recommended)
 
