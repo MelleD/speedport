@@ -35,7 +35,7 @@ jobs:
 
       - name: "Create Github release (full)"
         if: ${{ !contains( github.event.inputs.release_version, '-rc' ) }}
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         id: speedport_release
         with:
           body: "Release version ${{ github.event.inputs.release_version }}."
