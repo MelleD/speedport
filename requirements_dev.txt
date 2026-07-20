@@ -2,4 +2,4 @@ black>=22.12
 flake8>=7.3.0
 mypy>=0.991
 pylint>=4.0.5
-setuptools>=62.3
+setuptools>=83.0.0
